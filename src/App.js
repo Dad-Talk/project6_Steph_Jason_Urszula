@@ -10,7 +10,6 @@ import Submission from './Submission';
 import './App.css';
 
 
-
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyDYKO4NUxYv7mh4EbS01NqnHd7BvVj38l4",
@@ -33,10 +32,12 @@ class App extends Component {
       description:"",
       mood:"",
       image:"",
+      like:1,
       submitted: {}
 
     };
   }
+
 
   componentDidMount() {
     //attach event listener to firebase
@@ -55,7 +56,8 @@ class App extends Component {
       title: this.state.title,
       description: this.state.description,
       mood: this.state.mood,
-      image: this.state.image
+      image: this.state.image,
+      likes: 1
     }
     dbRef.push(newSubmission); 
 
@@ -64,8 +66,28 @@ class App extends Component {
       description: "",
       mood: "",
       image: "",
+      like: 1,
     });
   }
+
+  updateLikes = event => {
+    console.log('howdy!', event.target.value);
+
+    // //1. clone the current state
+    const newLikes = (this.state.submitted);
+    console.log('newLikes:', newLikes);
+
+    // //2. add one to the likes at [event.target.value]
+    newLikes[event.target.value].likes =
+      newLikes[event.target.value].likes + 1;
+
+    //3. set the state.
+    this.setState({
+      like: newLikes
+    })
+  };
+
+
 
   handleChange = (e) => {
     this.setState({
@@ -77,13 +99,14 @@ class App extends Component {
     render() {
       return (
         <div className="App">
-          <Submission 
-            submitted={this.state.submitted}
-          />
           <SubmissionsForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             />
+          <Submission 
+            submitted={this.state.submitted}
+            updateLikes={this.updateLikes}
+          />
         </div>
       );
     }
