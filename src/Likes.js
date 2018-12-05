@@ -1,26 +1,18 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const Likes = props => {
-    function isDisabled() {
-        if (props.inventory === 0) {
-            return true;
+
+class Likes extends Component {
+    constructor(){
+        super()
+        this.state={
+            clicks:0
         }
-        return false;
     }
-
-    return (
-        <div>
-
-            <h2>{props.title}</h2>
-            <p>{props.inventory}</p>
-            <button
-                value={props.id}
-                onClick={props.updateInventory}
-                disabled={isDisabled()}>
-                Buy a Donut
-            </button>
-        </div>
-    );
-};
+    render() {
+        return (
+            <button>{this.props.count}</button>
+        );
+    }
+}
 
 export default Likes;
