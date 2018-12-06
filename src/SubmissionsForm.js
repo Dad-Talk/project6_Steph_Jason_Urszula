@@ -30,7 +30,7 @@ class SubmissionsForm extends Component {
                     <label htmlFor="images"><p>Choose Image</p></label>
                     <select id="images" onChange={this.props.handleChange}>
                         <option>Default</option>
-                        <option><input type="image" id="images" onChange required value /></option>
+                        {/* <option><input type="image" id="images" onChange required value /></option> */}
                     </select>
 
                 </div>
