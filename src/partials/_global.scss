@@ -1,98 +1,64 @@
-// $primaryColor: #ABC6D1;
-// $fontColorDark: #545454;
-// $fontColorLight: #fcfcfc;
-// $hoverColor: #5C7788;
+$primaryColor: #df810d;
+$accentColorDark: #002350;
+$accentColorLight: #2070c3;
+$fontColorLight: #fcfcfc;
 
+@mixin primaryFont($size, $color) {
+    font-family: 'Muli', sans-serif;
+    color: $color;
+    font-size: $size;
+}
 
-// @mixin primaryFont($size, $color) {
-//     font-family: 'Nunito Sans', sans-serif;
-//     color: $color;
-//     letter-spacing: 1px;
-//     font-size: $size;
-// }
+@mixin secondaryFont($size, $color) {
+    font-family: 'Roboto', sans-serif;
+    font-size: $size;
+}
 
-// @mixin secondaryFont($size) {
-//     font-family: 'Pacifico', cursive;
-//     color: #fcfcfc;
-//     font-size: $size;
-// }
+html {
+    font-size: 62.5%;
+}
 
-// @mixin globalBtn {
-//     @include primaryFont(3rem, $fontColorLight);
-//     background: $primaryColor;
-//     padding: 15px 50px;
-//     text-transform: uppercase;
-//     color: $fontColorLight;
-//     display: inline-block;
-//     border: none;
-//     border-radius: 5px;
-//     &:hover {
-//         background: $hoverColor;
-//     }
-// }
+body {
+    font-size: 1.8rem;
+}
 
-// html {
-//     font-size: 62.5%;
-// }
+ul, li {
+	padding: 0;
+	margin: 0;
+}
 
-// body {
-//     font-size: 1.8rem;
-//     background: url(../images/background.png) no-repeat;
-//     background-size: cover;
-//     width: 100%;
-// }
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
 
-// ul, li {
-// 	padding: 0;
-// 	margin: 0;
-// }
+.visuallyhidden:not(:focus):not(:active) {
+     position: absolute;
+     width: 1px;
+     height: 1px;
+     margin: -1px;
+     border: 0;
+     padding: 0;
+     white-space: nowrap;
+     clip-path: inset(100%);
+     clip: rect(0 0 0 0);
+     overflow: hidden;
+}
 
-// a {
-//     text-decoration: none;
-//     cursor: pointer;
-// }
+// typography styles
 
-// .visuallyhidden:not(:focus):not(:active) {
-//      position: absolute;
-//      width: 1px;
-//      height: 1px;
-//      margin: -1px;
-//      border: 0;
-//      padding: 0;
-//      white-space: nowrap;
-//      clip-path: inset(100%);
-//      clip: rect(0 0 0 0);
-//      overflow: hidden;
-// }
+h1, h2, h3, h4, h5, h6, p {
+	padding: 0;
+    margin: 0;
+}
 
-// // typography styles
+// layout styles
 
-// h1, h2, h3, h4, h5, h6, p {
-// 	padding: 0;
-//     margin: 0;
-// }
-
-// h1 {
-//     @include secondaryFont(12rem);
-//     line-height: 1.2;
-// }
-
-// h2 {
-//     @include primaryFont(3rem, $fontColorLight)
-// }
-
-// p {
-//     @include primaryFont(4rem, $fontColorLight);
-//     font-weight: 300;
-// }
-
-// // layout styles
-
-// .wrapper {
-//     max-width: 1300px;
-//     margin: 0 auto;
-//     width: 80%;
-// }
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 80%;
+}
 
 
 
