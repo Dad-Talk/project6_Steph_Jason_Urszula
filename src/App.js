@@ -86,11 +86,8 @@ class App extends Component {
   }
 
   updateLikes = event => {
-<<<<<<< HEAD
 
-=======
  
->>>>>>> cec3eed79b47e639c8ab75ddb2df835fdb9be04e
     // //1. clone the current state
     const newLikes = Object.assign({}, this.state.submitted);
     const currentPost = newLikes[event.target.value]
@@ -98,6 +95,7 @@ class App extends Component {
     const currentPostFirebase = firebase.database().ref(event.target.value)
 
     // Turn userArray object in Firebase into an array
+    console.log("hey", currentPost, newLikes, event.target.value )
     const newUserArray = Array.from(currentPost.userArray);
     console.log('Original user Array', currentPost.userArray)
     
@@ -175,57 +173,33 @@ login = () => {
  }
 
     render() {
-      return (
-        <div className="App">
+      return <div className="App">
           <nav>
-            <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction}/>
+            <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction} />
           </nav>
-<<<<<<< HEAD
-          {/* Submission form will only appear if showForm state is true, and user state is true */}
-          {this.state.showForm && this.state.user &&
-          <SubmissionsForm
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            />}
-          <div>
-            {
-              Object.entries(this.state.submitted).map((moodSelected, i) => {
-                let moodArray = [];
-                moodArray.push({
-                  mood: moodSelected[1].mood
-                });
-                return (
-                  <div>
-                    {moodArray.map(displayMood => {
-                      return (
-                          <button>{displayMood.mood}</button>
-                      )
-                    })}
-                  </div>
-                )
-              })
-            }
-          </div>
-          <Submission 
-            submitted={this.state.submitted}
-            updateLikes={this.updateLikes}
-          />
-=======
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
-            {this.state.showForm && this.state.user &&
-            <SubmissionsForm
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              />}
-            <Submission 
-              submitted={this.state.submitted}
-              updateLikes={this.updateLikes}
-            />
+            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />}
+            <div>
+              {Object.entries(this.state.submitted).map(
+                (moodSelected, i) => {
+                  let moodArray = [];
+                  moodArray.push({
+                    mood: moodSelected[1].mood
+                  });
+                  return (
+                    <div>
+                      {moodArray.map((displayMood) => {
+                        return <button>{displayMood.mood}</button>;
+                      })}
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <Submission submitted={this.state.submitted} updateLikes={this.updateLikes} />
           </div>
->>>>>>> cec3eed79b47e639c8ab75ddb2df835fdb9be04e
-        </div>
-      );
+        </div>;
     }
 } 
 export default App;
