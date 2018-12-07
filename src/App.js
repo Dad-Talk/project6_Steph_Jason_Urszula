@@ -12,9 +12,6 @@ import './App.css';
 
 
 const dbRef = firebase.database().ref(); //the root of firebase
-const posts = firebase.database().ref("posts");
-const postLikes = firebase.database().ref('postLikes');
-
 
 function imageRandom(array) {
   return array[Math.floor(Math.random() * (array.length))];
@@ -29,6 +26,7 @@ class App extends Component {
       mood:"",
       image:"",
       like:1,
+      userArray: [],
       submitted: {},
       user: null,
       uid: "",
@@ -51,7 +49,7 @@ class App extends Component {
       if (user) {
         this.setState({ 
           user,
-          user: user.uid,
+          uid: user.uid,
           name: user.displayName,
           userImg: user.photoURL,
           loggedOut: false 
@@ -68,7 +66,8 @@ class App extends Component {
       description: this.state.description,
       mood: this.state.mood,
       image: imageRandom(dadPhotos),
-      likes: 1
+      likes: 1,
+      userArray: ["test", "test2"]
     }
     dbRef.push(newSubmission); 
 
@@ -77,38 +76,47 @@ class App extends Component {
       description: "",
       mood: "",
       image: "",
-      like: 1,
+      like: 1
     });
   }
 
   updateLikes = event => {
-    // const likedPosts = firebase.database().ref(event.target.value);
-    // likedPosts.on('value', (snapshot) => {
-    //   const newLikes = snapshot.val().likes;
-    //   console.log('new likes', newLikes)
-    //   // newLikes.likes = newLikes.likes + 1;
-    //   // likedPosts.set(newLikes)
-    // })
-    // console.log('liked posts', likedPosts)
-
-    // console.log('Update likes', this.state)
-    // console.log('howdy!', event.target.value);
-
+ 
     // //1. clone the current state
     const newLikes = Object.assign({}, this.state.submitted);
     const currentPost = newLikes[event.target.value]
+    const currentPostFirebase = firebase.database().ref(event.target.value)
 
-    console.log('newLikes:', currentPost);
+    const newUserArray = Array.from(currentPost.userArray);
+    console.log('Original user Array', currentPost.userArray)
+    
+    if (newUserArray.indexOf(this.state.uid) > -1) {
+      currentPost.likes =
+      currentPost.likes - 1;
+      
+      const index = newUserArray.indexOf(this.state.uid);
+      newUserArray.splice(index, 1);
+      currentPost.userArray = newUserArray
+    } else {
+      currentPost.likes =
+      currentPost.likes + 1;
+
+      newUserArray.push(this.state.uid);
+      currentPost.userArray = newUserArray;
+      console.log('userArray', currentPost.userArray);
+
+      
+    }
 
     // //2. add one to the likes at [event.target.value]
-    currentPost.likes =
-    currentPost.likes + 1;
+
+    
+
+    console.log('newArray', newUserArray);
 
     //3. set the state.
-    firebase.database().ref(event.target.value).set(currentPost);
-    // this.setState({
-    //   like: newLikes
-    // })
+    currentPostFirebase.set(currentPost);
+    // currentPostFirebase.set(currentPost.userArray);
   };
 
 

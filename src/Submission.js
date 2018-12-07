@@ -6,7 +6,6 @@ const Submission = props => {
     // function imageRandom(array) {
     // return array[Math.floor(Math.random() * (array.length))];
     // }
-    console.log('props', props);
     return (
         <div>
             { // Object.entries returns us an array so we can use map
