@@ -5,7 +5,7 @@ import dadPhotos from './dadPhotos';
 import SubmissionsForm from './SubmissionsForm'
 // import Likes from './Likes';
 import Login from './Login';
-// import Moods from './Moods';
+import Moods from './Moods';
 import Submission from './Submission';
 // import RandomSubmission from './RandomSubmission';
 import './App.css';
@@ -82,17 +82,6 @@ class App extends Component {
   }
 
   updateLikes = event => {
-    // const likedPosts = firebase.database().ref(event.target.value);
-    // likedPosts.on('value', (snapshot) => {
-    //   const newLikes = snapshot.val().likes;
-    //   console.log('new likes', newLikes)
-    //   // newLikes.likes = newLikes.likes + 1;
-    //   // likedPosts.set(newLikes)
-    // })
-    // console.log('liked posts', likedPosts)
-
-    // console.log('Update likes', this.state)
-    // console.log('howdy!', event.target.value);
 
     // //1. clone the current state
     const newLikes = Object.assign({}, this.state.submitted);
@@ -162,6 +151,25 @@ login = () => {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             />}
+          <div>
+            {
+              Object.entries(this.state.submitted).map((moodSelected, i) => {
+                let moodArray = [];
+                moodArray.push({
+                  mood: moodSelected[1].mood
+                });
+                return (
+                  <div>
+                    {moodArray.map(displayMood => {
+                      return (
+                          <button>{displayMood.mood}</button>
+                      )
+                    })}
+                  </div>
+                )
+              })
+            }
+          </div>
           <Submission 
             submitted={this.state.submitted}
             updateLikes={this.updateLikes}

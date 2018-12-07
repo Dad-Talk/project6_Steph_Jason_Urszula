@@ -1,23 +1,16 @@
 import React from 'react';
 
 const Moods = props => {
-    function isDisabled() {
-        if (props.inventory === 0) {
-            return true;
-        }
-        return false;
+    function noRepeats() {
     }
 
     return (
         <div>
-
-            <h2>{props.title}</h2>
-            <p>{props.inventory}</p>
             <button
                 value={props.id}
                 onClick={props.updateInventory}
-                disabled={isDisabled()}>
-                Buy a Donut
+                noRepeats={noRepeats()}>
+                {props.id}
             </button>
         </div>
     );
