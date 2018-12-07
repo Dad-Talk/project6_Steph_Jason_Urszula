@@ -13,7 +13,7 @@ const Submission = props => {
             { // Object.entries returns us an array so we can use map
 
                 Object.entries(props.submitted).map((card) => {
-                    return <div className="wrapper">
+                    return <div className="wrapper" key={card}>
                         <div className="submission-card">
                           <div key={card[0]}>
                             <img className="submission-card__img" src={card[1].image} alt="picture of typical dad" />
@@ -25,9 +25,14 @@ const Submission = props => {
                                 {card[1].description}
                               </p>
                               <div className="likes-container clearfix">
-                                <button className="submission-card__btn" onClick={props.updateLikes} value={card[0]}>
-                                  <img src={thumbsUp} className="thumb-img" width="25" height="25" />
-                                </button>
+                                {/* Ternary operator that chcks to see if user is logged in, and disables "like" button if they are logged out */}
+                                {props.user ? <button className="submission-card__btn" onClick={props.updateLikes} value={card[0]}>
+                                    <img src={thumbsUp} className="thumb-img" width="25" height="25"/>
+                                  </button> 
+                                  : 
+                                  <button className="submission-card__btn" onClick={props.updateLikes} value={card[0]} disabled>
+                                    <img src={thumbsUp} className="thumb-img" width="25" height="25" />
+                                  </button>}
                                 <p className="submission-card__likes">
                                   {card[1].likes}
                                 </p>
