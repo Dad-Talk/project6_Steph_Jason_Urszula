@@ -171,25 +171,33 @@ login = () => {
  }
 
     render() {
-      return (
-        <div className="App">
+      return <div className="App">
           <nav>
-            <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction}/>
+            <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction} />
           </nav>
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
-            {this.state.showForm && this.state.user &&
-            <SubmissionsForm
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              />}
-            <Submission 
-              submitted={this.state.submitted}
-              updateLikes={this.updateLikes}
-            />
+            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />}
+            <div>
+              {Object.entries(this.state.submitted).map(
+                (moodSelected, i) => {
+                  let moodArray = [];
+                  moodArray.push({
+                    mood: moodSelected[1].mood
+                  });
+                  return (
+                    <div>
+                      {moodArray.map((displayMood) => {
+                        return <button>{displayMood.mood}</button>;
+                      })}
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <Submission submitted={this.state.submitted} updateLikes={this.updateLikes} />
           </div>
-        </div>
-      );
+        </div>;
     }
 } 
 export default App;
