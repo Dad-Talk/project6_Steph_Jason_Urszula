@@ -176,16 +176,18 @@ login = () => {
           <nav>
             <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction}/>
           </nav>
-          {/* Submission form will only appear if showForm state is true, and user state is true */}
-          {this.state.showForm && this.state.user &&
-          <SubmissionsForm
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            />}
-          <Submission 
-            submitted={this.state.submitted}
-            updateLikes={this.updateLikes}
-          />
+          <div className="wrapper">
+            {/* Submission form will only appear if showForm state is true, and user state is true */}
+            {this.state.showForm && this.state.user &&
+            <SubmissionsForm
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              />}
+            <Submission 
+              submitted={this.state.submitted}
+              updateLikes={this.updateLikes}
+            />
+          </div>
         </div>
       );
     }
