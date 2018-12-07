@@ -86,7 +86,7 @@ class App extends Component {
   }
 
   updateLikes = event => {
-
+    event.stopPropagation();
  
     // //1. clone the current state
     const newLikes = Object.assign({}, this.state.submitted);

@@ -26,7 +26,7 @@ const Submission = props => {
                               </p>
                               <div className="likes-container clearfix">
                                 <button className="submission-card__btn" onClick={props.updateLikes} value={card[0]}>
-                                  <img src={thumbsUp} width="25" height="25" />
+                                  <img src={thumbsUp} className="thumb-img" width="25" height="25" />
                                 </button>
                                 <p className="submission-card__likes">
                                   {card[1].likes}

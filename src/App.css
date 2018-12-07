@@ -218,6 +218,9 @@ button, input[type="submit"], input[type="reset"] {
   cursor: pointer;
   outline: inherit; }
 
+.thumb-img {
+  pointer-events: none; }
+
 .dont-break-out {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
