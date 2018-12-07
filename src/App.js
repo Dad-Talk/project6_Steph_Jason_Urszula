@@ -12,10 +12,8 @@ import './App.css';
 
 
 const dbRef = firebase.database().ref(); //the root of firebase
-const posts = firebase.database().ref("posts");
-const postLikes = firebase.database().ref('postLikes');
 
-
+// Choose random image from array of images
 function imageRandom(array) {
   return array[Math.floor(Math.random() * (array.length))];
 }
@@ -29,6 +27,7 @@ class App extends Component {
       mood:"",
       image:"",
       like:1,
+      userArray: [],
       submitted: {},
       user: null,
       uid: "",
@@ -51,7 +50,7 @@ class App extends Component {
       if (user) {
         this.setState({ 
           user,
-          user: user.uid,
+          uid: user.uid,
           name: user.displayName,
           userImg: user.photoURL,
           loggedOut: false 
@@ -63,52 +62,70 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    // When user submits form, create object that records values of user submission
     const newSubmission = {
       title: this.state.title,
       description: this.state.description,
       mood: this.state.mood,
       image: imageRandom(dadPhotos),
-      likes: 1
+      likes: 1,
+      userArray: ["test", "test2"]
     }
+
+    // Push new object to store to firebase
     dbRef.push(newSubmission); 
 
+    // Reset values of state
     this.setState({
       title: "",
       description: "",
       mood: "",
       image: "",
-      like: 1,
+      like: 1
     });
   }
 
   updateLikes = event => {
-    // const likedPosts = firebase.database().ref(event.target.value);
-    // likedPosts.on('value', (snapshot) => {
-    //   const newLikes = snapshot.val().likes;
-    //   console.log('new likes', newLikes)
-    //   // newLikes.likes = newLikes.likes + 1;
-    //   // likedPosts.set(newLikes)
-    // })
-    // console.log('liked posts', likedPosts)
-
-    // console.log('Update likes', this.state)
-    // console.log('howdy!', event.target.value);
-
+ 
     // //1. clone the current state
     const newLikes = Object.assign({}, this.state.submitted);
     const currentPost = newLikes[event.target.value]
+    // Variable to target current submission in firebase
+    const currentPostFirebase = firebase.database().ref(event.target.value)
 
-    console.log('newLikes:', currentPost);
+    // Turn userArray object in Firebase into an array
+    const newUserArray = Array.from(currentPost.userArray);
+    console.log('Original user Array', currentPost.userArray)
+    
+    // Add conditions - if the uid exists within the user array, subtract 1 like on button click, and remove user ID from the array
+    if (newUserArray.indexOf(this.state.uid) > -1) {
+      currentPost.likes =
+      currentPost.likes - 1;
+      
+      const index = newUserArray.indexOf(this.state.uid);
+      newUserArray.splice(index, 1);
+      currentPost.userArray = newUserArray
+      // If the user ID doesn't already exist in the user array, add 1 to likes and push user ID into the array
+    } else {
+      currentPost.likes =
+      currentPost.likes + 1;
+
+      newUserArray.push(this.state.uid);
+      currentPost.userArray = newUserArray;
+      console.log('userArray', currentPost.userArray);
+
+      
+    }
 
     // //2. add one to the likes at [event.target.value]
-    currentPost.likes =
-    currentPost.likes + 1;
 
-    //3. set the state.
-    firebase.database().ref(event.target.value).set(currentPost);
-    // this.setState({
-    //   like: newLikes
-    // })
+    
+
+    console.log('newArray', newUserArray);
+
+    //3. Push new inofrmation to firebase
+    currentPostFirebase.set(currentPost);
+    // currentPostFirebase.set(currentPost.userArray);
   };
 
 
@@ -120,6 +137,7 @@ class App extends Component {
     console.log(e.target.value)
   }
 
+  // Login function - when user logs in, set states to match user information
 login = () => {
   auth.signInWithPopup(provider).then(result => {
    const user = result.user;
@@ -133,6 +151,7 @@ login = () => {
   }); 
  };
 
+  //  Logout function - when user is logged out, set user-related states to null
  logout = () => {
   auth.signOut().then(() => {
    this.setState({
@@ -144,6 +163,7 @@ login = () => {
   });
  };
 
+//  Change boolean value of showForm state (true to false, or false to true)
  showFormFunction = () => {
    this.setState ({
      showForm: !this.state.showForm
