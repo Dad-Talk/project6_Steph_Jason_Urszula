@@ -6,14 +6,15 @@ class SubmissionsForm extends Component {
             <form onSubmit={this.props.handleSubmit}>
                 <div className="leftInputs">
                     <label htmlFor="title"><p>Title</p></label>
-                    <input type="text" id="title" max="20" required onChange={this.props.handleChange} value={this.props.title}/>
+                    <input type="text" id="title" maxlength="20" required onChange={this.props.handleChange} value={this.props.title}/>
 
                     <label htmlFor="description"><p>Description</p></label>
-                    <input type="textarea" id="description" min="200" required onChange={this.props.handleChange} value={this.props.description}/>
+                    <textarea rows="5" cols="35" placeholder="250 Character max" maxlength="250" id="description" required onChange={this.props.handleChange} value={this.props.description}/>
                 </div>
                 <div className="rightDropdowns">
                     <label htmlFor="mood"><p>Choose Mood</p></label>
                     <select id="mood" onChange={this.props.handleChange}>
+                        console.log("mood", {this.props.handleChange})
                     <option value="" disabled selected>Select a mood</option>
                         {Object.entries(this.props.moodArray).map((moodOption) => 
                             {
