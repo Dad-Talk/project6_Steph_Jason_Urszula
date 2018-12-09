@@ -103,10 +103,15 @@ class App extends Component {
     const moodRef = firebase.database().ref('Moods');
     console.log('newNewMoodArray', newNewMoodArray);
 
-    newNewMoodArray.push(this.state.newMood);
-    moodRef.update(newNewMoodArray);
+    //filter moods here
+    let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
+    console.log(filteredMoodArray, 'fliteredMoodARray');
+
+    filteredMoodArray.push(this.state.newMood);
+    moodRef.update(filteredMoodArray);
+    console.log(newNewMoodArray, "newnewmoodarray")
   
-    console.log("Jason", newNewMoodArray);
+    console.log("Jason", filteredMoodArray);  
 
   }
 
