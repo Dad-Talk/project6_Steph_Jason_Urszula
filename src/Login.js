@@ -4,7 +4,6 @@ import React from 'react';
 
 const Login = props => {
  
-    console.log(props.userImg) 
     return (
         <div className="wrapper">
             {props.user && 

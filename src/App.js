@@ -12,6 +12,8 @@ import './App.css';
 
 
 const dbRef = firebase.database().ref(); //the root of firebase
+const posts = firebase.database().ref("Posts");
+const moods = firebase.database().ref("Moods");
 
 // Choose random image from array of images
 function imageRandom(array) {
@@ -28,6 +30,8 @@ class App extends Component {
       image:"",
       like:1,
       userArray: [],
+      newMood: "",
+      moodArray: [],
       submitted: {},
       user: null,
       uid: "",
@@ -39,12 +43,20 @@ class App extends Component {
 
   componentDidMount() {
     //attach event listener to firebase
-    dbRef.on('value', (snapshot) => {
-      // console.log(snapshot.val()); //firebase method, return me an object the represents verything in the database.
+    posts.on('value', (snapshot) => {
+    //firebase method, return me an object the represents verything in the database.
       this.setState({
         submitted: snapshot.val()//firebase method. Firebase is sending us our brand new object
       })
     });  
+
+    moods.on('value', (snapshot) => {
+      console.log('This is a snapshot')
+      this.setState({
+        moodArray: snapshot.val()
+      })
+    })
+
     // Keeps the user logged in
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -73,7 +85,7 @@ class App extends Component {
     }
 
     // Push new object to store to firebase
-    dbRef.push(newSubmission); 
+    posts.push(newSubmission); 
 
     // Reset values of state
     this.setState({
@@ -83,6 +95,19 @@ class App extends Component {
       image: "",
       like: 1
     });
+  }
+
+  newMoodSubmit = (e) => {
+    e.preventDefault();
+    const newNewMoodArray = Array.from(this.state.moodArray);
+    const moodRef = firebase.database().ref('Moods');
+    console.log('newNewMoodArray', newNewMoodArray);
+
+    newNewMoodArray.push(this.state.newMood);
+    moodRef.update(newNewMoodArray);
+  
+    console.log("Jason", newNewMoodArray);
+
   }
 
   updateLikes = event => {
@@ -95,9 +120,7 @@ class App extends Component {
     const currentPostFirebase = firebase.database().ref(event.target.value)
 
     // Turn userArray object in Firebase into an array
-    console.log("hey", currentPost, newLikes, event.target.value )
     const newUserArray = Array.from(currentPost.userArray);
-    console.log('Original user Array', currentPost.userArray)
     
     // Add conditions - if the uid exists within the user array, subtract 1 like on button click, and remove user ID from the array
     if (newUserArray.indexOf(this.state.uid) > -1) {
@@ -114,16 +137,12 @@ class App extends Component {
 
       newUserArray.push(this.state.uid);
       currentPost.userArray = newUserArray;
-      console.log('userArray', currentPost.userArray);
-
-      
     }
 
     // //2. add one to the likes at [event.target.value]
 
     
 
-    console.log('newArray', newUserArray);
 
     //3. Push new inofrmation to firebase
     currentPostFirebase.set(currentPost);
@@ -136,7 +155,7 @@ class App extends Component {
     this.setState({
       [e.target.id]: e.target.value //square brackets evaluate the property
     })
-    console.log(e.target.value)
+
   }
 
   // Login function - when user logs in, set states to match user information
@@ -179,17 +198,19 @@ login = () => {
           </nav>
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
-            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />}
+            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
+                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray}/>}
+            {/* Categories/moods */}
             <div>
               {Object.entries(this.state.submitted).map(
                 (moodSelected, i) => {
-                  let moodArray = [];
-                  moodArray.push({
+                  let moodButtons = [];
+                  moodButtons.push({
                     mood: moodSelected[1].mood
                   });
                   return (
                     <div>
-                      {moodArray.map((displayMood) => {
+                      {moodButtons.map((displayMood) => {
                         return <button>{displayMood.mood}</button>;
                       })}
                     </div>
@@ -197,7 +218,8 @@ login = () => {
                 }
               )}
             </div>
-            <Submission submitted={this.state.submitted} updateLikes={this.updateLikes} />
+            {/* Submissions */}
+            <Submission submitted={this.state.submitted} updateLikes={this.updateLikes} user={this.state.user} />
           </div>
         </div>;
     }
