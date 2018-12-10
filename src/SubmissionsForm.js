@@ -14,11 +14,13 @@ class SubmissionsForm extends Component {
                 <div className="rightDropdowns">
                     <label htmlFor="mood"><p>Choose Mood</p></label>
                     <select id="mood" onChange={this.props.handleChange}>
-                        console.log("mood", {this.props.handleChange})
-                    <option value="" disabled selected>Select a mood</option>
-                        {Object.entries(this.props.moodArray).map((moodOption) => 
+                    //checking to see if we have a prop of newMood, if we dont then we want to show this placeholder
+                    <option value="" selected = {this.props.newMood ? false : true } disabled>Select a mood</option>
+                        {this.props.moodArray.map((moodOption) => 
+                        
                             {
-                                return <option value={moodOption[1]}>{moodOption[1]}</option>
+                            //added selected to option and if it matches the newMood in our props
+                            return <option selected={(this.props.newMood && this.props.newMood) === moodOption ? true : false} value={moodOption}>{moodOption}</option>
                             }
                         )}
                     </select>
