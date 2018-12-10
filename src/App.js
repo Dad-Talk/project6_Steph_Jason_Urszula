@@ -122,7 +122,7 @@ class App extends Component {
     const newLikes = Object.assign({}, this.state.submitted);
     const currentPost = newLikes[event.target.value]
     // Variable to target current submission in firebase
-    const currentPostFirebase = firebase.database().ref(event.target.value)
+    const currentPostFirebase = firebase.database().ref(`/Posts/${event.target.value}`)
 
     // Turn userArray object in Firebase into an array
     const newUserArray = Array.from(currentPost.userArray);
