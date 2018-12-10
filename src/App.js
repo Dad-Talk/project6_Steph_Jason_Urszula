@@ -100,19 +100,14 @@ class App extends Component {
   newMoodSubmit = (e) => {
     e.preventDefault();
     const newNewMoodArray = Array.from(this.state.moodArray);
-    const moodRef = firebase.database().ref('Moods');
+    const moodRef = firebase.database().ref('Moods/');
     console.log('newNewMoodArray', newNewMoodArray);
 
     //filter moods here
-    let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
-    console.log(filteredMoodArray, 'fliteredMoodARray');
-
     newNewMoodArray.push(this.state.newMood);
+
+    let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
     moodRef.update(filteredMoodArray);
-
-  
-    // console.log("Jason", filteredMoodArray);  
-
   }
 
   updateLikes = event => {
