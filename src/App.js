@@ -51,9 +51,11 @@ class App extends Component {
     });  
 
     moods.on('value', (snapshot) => {
-      console.log('This is a snapshot')
+      //snapshot from firebase is not diff enough from firebase, so we have to clone the array
+      console.log('This is a snapshot, moods were updated')
+      const newState = Array.from(snapshot.val());
       this.setState({
-        moodArray: snapshot.val()
+        moodArray: newState
       })
     })
 
@@ -78,7 +80,7 @@ class App extends Component {
     const newSubmission = {
       title: this.state.title,
       description: this.state.description,
-      mood: this.state.mood,
+      mood: this.state.newMood,
       image: imageRandom(dadPhotos),
       likes: 1,
       userArray: ["test", "test2"]
@@ -93,22 +95,29 @@ class App extends Component {
       description: "",
       mood: "",
       image: "",
-      like: 1
+      like: 1,
+      newMood: ""
     });
   }
+
+  //ON click of mood button, we need to change mood: newmood
 
   newMoodSubmit = (e) => {
     e.preventDefault();
     const newNewMoodArray = Array.from(this.state.moodArray);
     const moodRef = firebase.database().ref('Moods/');
-    console.log('newNewMoodArray', newNewMoodArray);
+    
 
     //filter moods here
     newNewMoodArray.push(this.state.newMood);
 
     let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
     moodRef.update(filteredMoodArray);
+
+    console.log("newNewMoodArray", newNewMoodArray);
   }
+
+  
 
   updateLikes = event => {
     event.stopPropagation();
@@ -199,7 +208,7 @@ login = () => {
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
             {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
-                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray}/>}
+                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood}/>}
             {/* Categories/moods */}
             <div>
               {Object.entries(this.state.submitted).map(
