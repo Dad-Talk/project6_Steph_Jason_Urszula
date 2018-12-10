@@ -107,11 +107,11 @@ class App extends Component {
     let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
     console.log(filteredMoodArray, 'fliteredMoodARray');
 
-    filteredMoodArray.push(this.state.newMood);
+    newNewMoodArray.push(this.state.newMood);
     moodRef.update(filteredMoodArray);
-    console.log(newNewMoodArray, "newnewmoodarray")
+
   
-    console.log("Jason", filteredMoodArray);  
+    // console.log("Jason", filteredMoodArray);  
 
   }
 
