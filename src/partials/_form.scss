@@ -1,8 +1,9 @@
 .form-container {
     background: #F2F2F2;
     border-radius: 8px;
-    padding: 20px;
-    width: 550px;
+    padding: 30px;
+    max-width: 600px;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -26,11 +27,27 @@
     border-radius: 5px;
     border: none;
     padding: 5px 0;
+    width: 100%;
 }
 
-.form-btn {
-    @include secondaryFont(1.8rem, #fcfcfc);
-    background: $accentColorDark;
-    padding: 0px 20px;
+
+.form-custom-input {
+    width: 78%;
+}
+
+.form-custom-btn {
+    @include secondaryFont(1.8rem, $accentColorDark);
+    padding: 3px 20px;
+    width: 20%;
+    border: 2px solid $accentColorDark; 
+    margin-left: 10px;
     border-radius: 5px;
+}
+
+.form-submit-btn {
+    @include secondaryFont(1.8rem, #fcfcfc);
+    padding: 3px 20px;
+    border: none;
+    background: $accentColorDark;
+    margin-top: 10px;
 }
