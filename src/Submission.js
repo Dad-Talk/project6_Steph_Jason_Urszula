@@ -1,7 +1,6 @@
 import React from 'react';
-import dadPhotos from './dadPhotos'
 import "./App.css";
-import thumbsUp from '../src/assets/like.png'
+import thumbsUp from '../src/assets/thumbs-up.svg'
 // import Likes from './Likes'
 
 const Submission = props => {
@@ -13,11 +12,14 @@ const Submission = props => {
             { // Object.entries returns us an array so we can use map
 
                 Object.entries(props.submitted).map((card) => {
-                    return <div className="wrapper" key={card}>
+                    return <div key={card}>
                         <div className="submission-card">
                           <div key={card[0]}>
-                            <img className="submission-card__img" src={card[1].image} alt="picture of typical dad" />
-                            <div className="content-container clearfix">
+                              <img className="submission-card__img" src={card[1].image} alt="picture of        typical dad" />
+                              <p className="submission-card__mood">
+                                {card[1].mood}
+                              </p>
+                              <div className="content-container clearfix">
                               <h2 className="submission-card__title dont-break-out">
                                 {card[1].title}
                               </h2>
@@ -35,9 +37,6 @@ const Submission = props => {
                                   </button>}
                                 <p className="submission-card__likes">
                                   {card[1].likes}
-                                </p>
-                                <p className="submission-card__mood">
-                                  {card[1].mood}
                                 </p>
                               </div>
                             </div>

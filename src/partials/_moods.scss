@@ -1,0 +1,16 @@
+
+.mood-btn {
+    @include fancyFont(3rem, $accentColorDark);
+    padding: 20px;
+    float: left;
+    position: relative;
+}
+
+.mood-btn:hover::before {
+    content: '-';
+    width: 50px;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    color: $primaryColor;
+}

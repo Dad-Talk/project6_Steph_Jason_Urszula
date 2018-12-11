@@ -1,0 +1,36 @@
+.form-container {
+    background: #F2F2F2;
+    border-radius: 8px;
+    padding: 20px;
+    width: 550px;
+    margin: 0 auto;
+}
+
+.form-heading {
+    @include fancyFont(2.5rem, $accentColorDark);
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.form-title,
+.form-description,
+.form-mood,
+.form-custom-mood {
+    @include secondaryFont(2rem, $accentColorDark);
+}
+
+.form-title-input,
+.form-description-input,
+.form-mood-input,
+.form-custom-input {
+    border-radius: 5px;
+    border: none;
+    padding: 5px 0;
+}
+
+.form-btn {
+    @include secondaryFont(1.8rem, #fcfcfc);
+    background: $accentColorDark;
+    padding: 0px 20px;
+    border-radius: 5px;
+}
