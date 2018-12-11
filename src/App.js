@@ -74,26 +74,35 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // When user submits form, create object that records values of user submission
-    const newSubmission = {
-      title: this.state.title,
-      description: this.state.description,
-      mood: this.state.newMood,
-      likes: 1,
-      userArray: ["test", "test2"]
-    }
 
-    // Push new object to store to firebase
-    posts.push(newSubmission); 
+     if(this.state.newMood === "" && this.state.mood === "") {
+              // alert message 
+          } else {
 
-    // Reset values of state
-    this.setState({
-      title: "",
-      description: "",
-      mood: "",
-      like: 1,
-      newMood: ""
-    });
+            // When user submits form, create object that records values of user submission
+            const newSubmission = {
+              title: this.state.title,
+              description: this.state.description,
+              mood: this.state.newMood,
+              likes: 1,
+              userArray: ["test", "test2"]
+            }
+        
+            // Push new object to store to firebase
+            posts.push(newSubmission); 
+        
+            // Reset values of state
+            this.setState({
+              title: "",
+              description: "",
+              mood: "",
+              like: 1,
+              newMood: ""
+            });
+
+          }
+        
+
   }
 
   //ON click of mood button, we need to change mood: newmood
@@ -109,6 +118,10 @@ class App extends Component {
 
     let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i); 
     moodRef.update(filteredMoodArray);
+
+    // this.setState({
+    //   // newMood:""
+    // })
 
     console.log("newNewMoodArray", newNewMoodArray);
   }
@@ -208,7 +221,7 @@ login = () => {
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
             {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
-                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood}/>}
+                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood} mood={this.state.mood}/>} 
             {/* Categories/moods */}
             <div className="moods-container clearfix">
               {Object.entries(this.state.moodArray).map(
