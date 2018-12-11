@@ -12,6 +12,13 @@ $fontColorLight: #fcfcfc;
 @mixin secondaryFont($size, $color) {
     font-family: 'Roboto', sans-serif;
     font-size: $size;
+    color: $color;
+}
+
+@mixin fancyFont($size, $color) {
+    font-family: 'Permanent Marker', cursive;
+    font-size: $size;
+    color: $color;
 }
 
 html {
