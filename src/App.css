@@ -234,7 +234,7 @@ h1, h2, h3, h4, h5, h6, p {
 .submission-card:nth-child(3n + 3) {
   margin-right: 0; }
 
-button, input[type="submit"], input[type="reset"] {
+button, input[type="reset"] {
   background: none;
   color: inherit;
   border: none;
@@ -300,8 +300,9 @@ nav {
 .form-container {
   background: #F2F2F2;
   border-radius: 8px;
-  padding: 20px;
-  width: 550px;
+  padding: 30px;
+  max-width: 600px;
+  width: 80%;
   margin: 0 auto; }
 
 .form-heading {
@@ -325,12 +326,27 @@ nav {
 .form-custom-input {
   border-radius: 5px;
   border: none;
-  padding: 5px 0; }
+  padding: 5px 0;
+  width: 100%; }
 
-.form-btn {
+.form-custom-input {
+  width: 78%; }
+
+.form-custom-btn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  color: #002350;
+  padding: 3px 20px;
+  width: 20%;
+  border: 2px solid #002350;
+  margin-left: 10px;
+  border-radius: 5px; }
+
+.form-submit-btn {
   font-family: 'Roboto', sans-serif;
   font-size: 1.8rem;
   color: #fcfcfc;
+  padding: 3px 20px;
+  border: none;
   background: #002350;
-  padding: 0px 20px;
-  border-radius: 5px; }
+  margin-top: 10px; }
