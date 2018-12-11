@@ -11,7 +11,7 @@ const Submission = props => {
         <div>
             { // Object.entries returns us an array so we can use map
 
-                Object.entries(props.submitted).map((card) => {
+                Object.entries(props.sortSubmitted).map((card) => {
                     return <div key={card}>
                         <div className="submission-card">
                           <div key={card[0]}>
