@@ -38,15 +38,19 @@ class SubmissionsForm extends Component {
                     <p className="form-mood">Choose Mood</p>
                   </label>
                   <select className="form-mood-input" id="mood" onChange={this.props.handleChange}>
-                    //checking to see if we have a prop of newMood, if we dont then we want to show this placeholder
+                    {/* //checking to see if we have a prop of newMood, if we dont then we want to show this placeholder */}
                     <option value="" selected={this.props.newMood ? false : true} disabled>
                       Select a mood
                     </option>
                     {this.props.moodArray.map(moodOption => {
                       //added selected to option and if it matches the newMood in our props
+
+                      return <option selected={(this.props.newMood && this.props.newMood) === moodOption ? true : false} value={moodOption}>{moodOption}</option>;
+
                       return <option selected={this.props.newMood && (this.props.newMood === moodOption) ? true : false} value={moodOption}>
                           {moodOption}
                         </option>;
+
                     })}
                   </select>
                 </div>
