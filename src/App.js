@@ -9,6 +9,7 @@ import Submission from './Submission';
 // import RandomSubmission from './RandomSubmission';
 import './App.css';
 import logo from "../src/assets/dad-talk-logo.svg";
+import { ifError } from 'assert';
 
 
 const dbRef = firebase.database().ref(); //the root of firebase
@@ -33,6 +34,7 @@ class App extends Component {
       newMood: "",
       moodArray: [],
       submitted: {},
+      sortSubmitted: {},
       user: null,
       uid: "",
       showForm: false
@@ -105,7 +107,6 @@ class App extends Component {
     const newNewMoodArray = Array.from(this.state.moodArray);
     const moodRef = firebase.database().ref('Moods/');
     
-
     //filter moods here
     newNewMoodArray.push(this.state.newMood);
 
@@ -113,6 +114,25 @@ class App extends Component {
     moodRef.update(filteredMoodArray);
 
     console.log("newNewMoodArray", newNewMoodArray);
+  }
+
+  
+
+  reSubmit = (moodButton) => {
+    const tempArray = Object.entries(this.state.submitted)
+    
+    const newState = {};
+    const filteredArray = tempArray.filter((item) => {
+      return item[1].mood === moodButton;
+    }).forEach((match) => {
+      newState[match[0]] = match[1]
+    })
+    
+    console.log("this", newState)
+  
+    this.setState({
+      sortSubmitted: newState
+    })
   }
 
   
@@ -223,7 +243,8 @@ login = () => {
                     <div>
                       {/* the parent needs a clearfix but it stops floats from working */}
                       {moodButtons.map((displayMood) => {
-                        return <button className="mood-btn">{displayMood.mood}</button>;
+                        return <button onClick={() => this.reSubmit(displayMood.mood)} className="mood-btn">{displayMood.mood}</button>;
+                        // annonymous function and ".this" were added infront of reSubmit to have the resubmit function wait to fire until it gets the values passed in the parameter ie displayMood.mood
                       })}
                     </div>
                   );
@@ -231,7 +252,7 @@ login = () => {
               )}
             </div>
             {/* Submissions */}
-            <Submission submitted={this.state.submitted} updateLikes={this.updateLikes} user={this.state.user} />
+            <Submission sortSubmitted={this.state.sortSubmitted} updateLikes={this.updateLikes} user={this.state.user} />
           </div>
         </div>;
     }
