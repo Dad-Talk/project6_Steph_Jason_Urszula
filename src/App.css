@@ -169,47 +169,72 @@ h1, h2, h3, h4, h5, h6, p {
 
 .submission-card {
   width: calc((100% - 60px) / 3);
-  height: 450px;
-  margin: 20px 20px;
+  height: 330px;
+  margin: 15px 15px;
   float: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s; }
+  transition: 0.3s;
+  border-radius: 8px;
+  border: 2px solid #E6E6E6;
+  position: relative; }
   .submission-card__img {
     width: 100%;
     height: 10vw;
-    object-fit: cover; }
+    object-fit: cover;
+    display: none; }
   .submission-card__title {
-    font-family: 'Muli', sans-serif;
-    color: #35393C;
-    font-size: 2rem;
-    padding-bottom: 10px; }
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.3rem;
+    color: #002350;
+    padding: 25px 0 15px 0; }
   .submission-card__desc {
     font-family: 'Muli', sans-serif;
-    color: grey;
+    color: #666666;
     font-size: 1.6rem; }
   .submission-card__btn, .submission-card__likes {
-    float: right;
-    color: #df810d; }
+    float: right; }
+  .submission-card__likes {
+    padding-top: 12px;
+    font-size: 2.5rem;
+    padding-right: 5px;
+    color: #fcfcfc; }
   .submission-card__mood {
-    float: left;
+    font-family: 'Muli', sans-serif;
     color: #df810d;
-    text-transform: capitalize; }
-  .submission-card__btn, .submission-card__likes, .submission-card__mood {
-    padding-top: 15px; }
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    text-decoration: underline;
+    position: absolute;
+    top: 10px;
+    left: 15px; }
+
+.thumb-img {
+  width: 50px;
+  height: 50px;
+  padding: 10px 15px 10px 0;
+  pointer-events: none; }
+
+.content-container {
+  padding: 15px; }
+
+.likes-container {
+  background: #002350;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 0 0 8px 8px; }
 
 .submission-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
 
-.submission-card:nth-of-type(3n + 1) {
+.submission-card:nth-child(3n + 1) {
   margin-left: 0; }
 
 .submission-card:nth-child(3n + 3) {
   margin-right: 0; }
 
-.content-container {
-  padding: 15px; }
-
-button, input[type="submit"], input[type="reset"] {
+button, input[type="reset"] {
   background: none;
   color: inherit;
   border: none;
@@ -218,31 +243,175 @@ button, input[type="submit"], input[type="reset"] {
   cursor: pointer;
   outline: inherit; }
 
-.thumb-img {
-  pointer-events: none; }
+@media (max-width: 768px) {
+  .submission-card,
+  .submission-card:nth-child(3n + 1),
+  .submission-card:nth-child(3n + 3) {
+    width: calc((100% - 30px) / 2);
+    margin: 15px 15px; }
+  .submission-card:nth-child(2n + 1) {
+    margin-left: 0; }
+  .submission-card:nth-child(2n + 2) {
+    margin-right: 0px; } }
 
-.dont-break-out {
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto; }
+@media (max-width: 540px) {
+  .submission-card,
+  .submission-card:nth-child(3n + 1),
+  .submission-card:nth-child(3n + 3) {
+    width: 100%;
+    margin: 15px 0px; }
+  .submission-card:nth-child(2n + 1) {
+    margin-left: 0; }
+  .submission-card:nth-child(2n + 2) {
+    margin-right: 0px; } }
+
+header {
+  background: url("assets/header-background.png") no-repeat center center;
+  background-size: cover;
+  height: 75vh;
+  text-align: center; }
+
+.heading {
+  font-family: 'Muli', sans-serif;
+  color: #ACACAC;
+  font-size: 2rem;
+  text-transform: capitalize;
+  margin: -35px 20px 0 0; }
+
+.logo {
+  width: 400px; }
 
 nav {
-  width: 100%;
-  height: 100px;
-  background: darkblue;
-  color: white; }
+  color: black; }
 
 .userImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  float: right;
+  margin-top: 20px;
+  margin-left: 10px; }
+
+.nav-btn {
+  text-transform: uppercase;
+  float: right;
+  font-family: 'Muli', sans-serif;
+  color: #002350;
+  font-size: 1.8rem;
+  padding: 7px 13px;
+  margin-top: 20px;
+  border: solid 3px #002350;
+  margin-left: 10px;
+  border-radius: 5px; }
+
+.nav-btn:hover {
+  border: 3px solid #2070c3;
+  color: #2070c3; }
+
+@media (max-width: 768px) {
+  .nav-btn {
+    margin-bottom: 30px; } }
+
+.moods-container {
+  margin: 0 auto;
+  text-align: center; }
+
+.mood-btn-wrap {
+  display: inline-block; }
+
+.mood-btn {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 3rem;
+  color: #002350;
+  padding: 5px 20px 5px 20px;
+  float: left;
+  position: relative; }
+
+.mood-btn:hover::before {
+  content: '-';
   width: 50px;
-  height: 50px;
-  border-radius: 50%; }
+  position: absolute;
+  left: 0;
+  top: 35px;
+  color: #df810d; }
+
+.main-form {
+  position: relative; }
+
+.form-container {
+  background: #F2F2F2;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 600px;
+  width: 80%;
+  margin: 0 auto 30px auto; }
+
+.form-heading {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 2.5rem;
+  color: #002350;
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 30px; }
+
+.form-title,
+.form-description,
+.form-mood,
+.form-custom-mood {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  color: #002350;
+  padding-bottom: 5px; }
+
+.form-title-input,
+.form-description-input,
+.form-mood-input,
+.form-custom-input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px 0;
+  margin-bottom: 20px;
+  width: 100%; }
+
+.form-custom-input {
+  width: 66%; }
+
+.form-custom-btn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  color: #002350;
+  padding: 1.5px 20px;
+  width: 30%;
+  border: 2px solid #002350;
+  margin-left: 4%;
+  border-radius: 5px; }
+
+.form-custom-btn:hover {
+  border: 2px solid #2070c3;
+  color: #2070c3; }
+
+.main-form-btn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  color: #fcfcfc;
+  padding: 3px 20px;
+  border: none;
+  background: #002350;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 5px; }
+
+.main-form-btn:hover {
+  background: #2070c3; }
+
+.toggle-img {
+  float: right;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 600px;
+    width: 100%; } }
