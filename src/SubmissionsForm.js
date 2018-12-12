@@ -2,21 +2,12 @@ import React, { Component, Fragment } from 'react';
 
 class SubmissionsForm extends Component {
 
-<<<<<<< HEAD
     isDisabled = () => {
         if (this.props.newMood === "") {
             return true;
         }
         return false;
     }
-=======
-  isDisabled = () => {
-    if (this.props.newMood === "") {
-      return true;
-    }
-    return false;
-  }
->>>>>>> 229b0bdd128964439f18a124bcb8ab68c6923942
     render() {
         return <Fragment>
             <div className="form-container">
@@ -51,17 +42,6 @@ class SubmissionsForm extends Component {
                     })}
                   </select>
                 </div>
-<<<<<<< HEAD
-                <div className="mood-container clearfix">
-                    <label htmlFor="newMood"><p className="form-custom-mood">Add Mood</p></label>
-                    <input onChange={this.props.handleChange} className="form-custom-input" type="text" id="newMood" />
-                    <button className="form-btn" onClick={this.props.newMoodSubmit} disabled={this.isDisabled()}>
-                        Add
-                </button>
-
-                    <input className="form-btn" type="submit" value="Submit" />
-                </form>
-=======
                 <label htmlFor="newMood"><p className="form-custom-mood">Add Mood</p></label>
                 <input onChange={this.props.handleChange} className="form-custom-input" type="text" id="newMood" />
                 <button className="form-btn" onClick={this.props.newMoodSubmit} disabled={this.isDisabled()}>
@@ -70,7 +50,6 @@ class SubmissionsForm extends Component {
 
                 <input className="form-btn" type="submit" value="Submit" />
               </form>
->>>>>>> 229b0bdd128964439f18a124bcb8ab68c6923942
             </div>
         </Fragment>;
     }
