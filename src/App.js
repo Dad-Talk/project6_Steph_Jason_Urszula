@@ -76,7 +76,16 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    // When user submits form, create object that records values of user submission
+    const newSubmission = {
+      title: this.state.title,
+      description: this.state.description,
+      mood: this.state.newMood,
+      likes: 1,
+      userArray: ["test", "test2"]
+    }
 
+<<<<<<< HEAD
     if (this.state.newMood === "" && this.state.mood === "") {
       // alert message 
     } else {
@@ -104,7 +113,19 @@ class App extends Component {
 
     }
 
+=======
+    // Push new object to store to firebase
+    posts.push(newSubmission); 
+>>>>>>> ffcf933f19f16d8349905aba31f8613901742c4f
 
+    // Reset values of state
+    this.setState({
+      title: "",
+      description: "",
+      mood: "",
+      like: 1,
+      newMood: ""
+    });
   }
 
   //ON click of mood button, we need to change mood: newmood
@@ -119,10 +140,6 @@ class App extends Component {
 
     let filteredMoodArray = newNewMoodArray.filter((v, i, a) => a.indexOf(v) === i);
     moodRef.update(filteredMoodArray);
-
-    // this.setState({
-    //   // newMood:""
-    // })
 
     console.log("newNewMoodArray", newNewMoodArray);
   }
@@ -211,61 +228,61 @@ class App extends Component {
   };
 
   //  Logout function - when user is logged out, set user-related states to null
-  logout = () => {
-    auth.signOut().then(() => {
-      this.setState({
-        user: null,
-        uid: null,
-        email: null,
-        loggedOut: true
-      });
-    });
-  };
+ logout = () => {
+  auth.signOut().then(() => {
+   this.setState({
+    user: null,
+    uid: null,
+    email: null,
+    loggedOut: true
+   });
+  });
+ };
 
-  //  Change boolean value of showForm state (true to false, or false to true)
-  showFormFunction = () => {
-    this.setState({
-      showForm: !this.state.showForm
-    })
-  }
+//  Change boolean value of showForm state (true to false, or false to true)
+ showFormFunction = () => {
+   this.setState ({
+     showForm: !this.state.showForm
+   })
+ }
 
-  render() {
-    return <div className="App">
-      <header>
-        <nav>
-          <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction} />
-          <img src={logo} className="logo" alt="Dad talk logo" />
-          <h2 className="heading">Conversation starters</h2>
-        </nav>
-      </header>
-      <div className="wrapper">
-        {/* Submission form will only appear if showForm state is true, and user state is true */}
-        {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
-        } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood} mood={this.state.mood} />}
-        {/* Categories/moods */}
-        <div className="moods-container clearfix">
-          {Object.entries(this.state.moodArray).map(
-            (moodSelected, i) => {
-              let moodButtons = [];
-              moodButtons.push({
-                mood: moodSelected[1]
-              });
-              return (
-                <div>
-                  {/* the parent needs a clearfix but it stops floats from working */}
-                  {moodButtons.map((displayMood) => {
-                    return <button onClick={() => this.reSubmit(displayMood.mood)} className="mood-btn">{displayMood.mood}</button>;
-                    // annonymous function and ".this" were added infront of reSubmit to have the resubmit function wait to fire until it gets the values passed in the parameter ie displayMood.mood
-                  })}
-                </div>
-              );
-            }
-          )}
-        </div>
-        {/* Submissions */}
-        <Submission sortSubmitted={this.state.sortSubmitted} updateLikes={this.updateLikes} user={this.state.user} />
-      </div>
-    </div>;
-  }
-}
+    render() {
+      return <div className="App">
+          <header>
+            <nav>
+              <Login user={this.state.user} login={this.login} logout={this.logout} userImg={this.state.userImg} showForm={this.showFormFunction} />
+              <img src={logo} className="logo" alt="Dad talk logo"/>
+              <h2 className="heading">Conversation starters</h2>
+            </nav>
+          </header>
+          <div className="wrapper">
+            {/* Submission form will only appear if showForm state is true, and user state is true */}
+            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
+                } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood}/>}
+            {/* Categories/moods */}
+            <div className="moods-container clearfix">
+              {Object.entries(this.state.moodArray).map(
+                (moodSelected, i) => {
+                  let moodButtons = [];
+                  moodButtons.push({
+                    mood: moodSelected[1]
+                  });
+                  return (
+                    <div>
+                      {/* the parent needs a clearfix but it stops floats from working */}
+                      {moodButtons.map((displayMood) => {
+                        return <button onClick={() => this.reSubmit(displayMood.mood)} className="mood-btn">{displayMood.mood}</button>;
+                        // annonymous function and ".this" were added infront of reSubmit to have the resubmit function wait to fire until it gets the values passed in the parameter ie displayMood.mood
+                      })}
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            {/* Submissions */}
+            <Submission sortSubmitted={this.state.sortSubmitted} updateLikes={this.updateLikes} user={this.state.user} />
+          </div>
+        </div>;
+    }
+} 
 export default App;
