@@ -1,51 +1,78 @@
 .submission-card {
     width: calc((100% - 60px) / 3);
-    height: 450px;
-    margin: 20px 20px;
+    height: 330px;
+    margin: 15px 15px;
     float: left;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;  
+    border-radius: 8px;
+    border: 2px solid #E6E6E6;
+    position: relative;
 
     &__img {
         width: 100%;
         height: 10vw;
         object-fit: cover;
+        display: none;
 
     }
 
     &__title {
-        @include primaryFont(2rem, #35393C);
-        padding-bottom: 10px;
+        @include secondaryFont(2.3rem, $accentColorDark);
+        padding: 25px 0 15px 0;
     }
 
     &__desc {
-        @include primaryFont(1.6rem, grey)
+        @include primaryFont(1.6rem, #666666)
     }
 
     &__btn,
     &__likes {
         float: right;
-        color: $primaryColor;
+    }
+
+    &__likes {
+        padding-top: 12px;
+        font-size: 2.5rem;
+        padding-right: 5px;
+        color: #fcfcfc;
     }
 
     &__mood {
-        float: left; 
-        color: $primaryColor;
+        @include primaryFont(1.6rem, $primaryColor);
         text-transform: capitalize;
+        text-decoration: underline;
+        position: absolute;
+        top: 10px;
+        left: 15px;
     }
+}
 
-    &__btn,
-    &__likes,
-    &__mood {
-        padding-top: 15px;
-    }
+.thumb-img {
+    width: 50px;
+    height: 50px;
+    padding: 10px 15px 10px 0;
+    pointer-events: none;
+}
+
+.content-container {
+    padding: 15px;
+}
+
+.likes-container {
+    background: $accentColorDark;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
 }
 
 .submission-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.submission-card:nth-of-type(3n + 1) {
+.submission-card:nth-child(3n + 1) {
     margin-left: 0;
 }
 
@@ -53,11 +80,9 @@
     margin-right: 0;
 }
 
-.content-container {
-    padding: 15px;
-}
 
-button, input[type="submit"], input[type="reset"] {
+
+button, input[type="reset"] {
 	background: none;
 	color: inherit;
 	border: none;
@@ -67,26 +92,36 @@ button, input[type="submit"], input[type="reset"] {
 	outline: inherit;
 }
 
-.thumb-img{
-    pointer-events: none;
+@media(max-width: 768px) {
+   .submission-card,
+   .submission-card:nth-child(3n + 1),
+   .submission-card:nth-child(3n + 3) {
+        width: calc((100% - 30px) / 2);
+        margin: 15px 15px;
+   } 
+
+   .submission-card:nth-child(2n + 1) {
+        margin-left: 0;
+    }
+
+    .submission-card:nth-child( 2n + 2 ) {
+        margin-right: 0px;
+    }
 }
 
-.dont-break-out {
+@media(max-width: 540px) {
+    .submission-card,
+    .submission-card:nth-child(3n + 1),
+    .submission-card:nth-child(3n + 3) {
+        width: 100%;
+        margin: 15px 0px;
+   } 
 
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+   .submission-card:nth-child(2n + 1) {
+        margin-left: 0;
+    }
 
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-
+    .submission-card:nth-child( 2n + 2 ) {
+        margin-right: 0px;
+    }
 }

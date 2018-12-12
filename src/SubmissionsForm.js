@@ -1,47 +1,61 @@
 import React, { Component, Fragment } from 'react';
+import x from '../src/assets/x.svg';
 
 class SubmissionsForm extends Component {
-    render() {
-        return ( <Fragment>
-            <form onSubmit={this.props.handleSubmit}>
-                <div className="leftInputs">
-                    <label htmlFor="title"><p>Title</p></label>
-                    <input type="text" id="title" maxlength="20" required onChange={this.props.handleChange} value={this.props.title}/>
 
-                    <label htmlFor="description"><p>Description</p></label>
-                    <textarea rows="5" cols="35" placeholder="250 Character max" maxlength="250" id="description" required onChange={this.props.handleChange} value={this.props.description}/>
+    isDisabled = () => {
+        if (this.props.newMood === "") {
+            return true;
+        }
+        return false;
+    }
+    render() {
+        return <Fragment>
+            <div className="form-container">
+              <form className="clearfix main-form" onSubmit={this.props.handleSubmit}>
+                <button className="toggle-img" onClick={this.props.showForm}>
+                  <img src={x} />
+                </button>
+                <h2 className="form-heading">Submit your own conversation starter</h2>
+                <div className="leftInputs clearfix">
+                  <label htmlFor="title">
+                    <p className="form-title">Title</p>
+                  </label>
+                  <input className="form-title-input" type="text" id="title" maxlength="20" required onChange={this.props.handleChange} value={this.props.title} />
+                  <div class="description-container">
+                    <label htmlFor="description">
+                        <p className="form-description">Description</p>
+                    </label>
+                    <textarea className="form-description-input" rows="8" cols="40" placeholder="350 Character max" maxlength="350" id="description" required onChange={this.props.handleChange} value={this.props.description} />
+                  </div>
                 </div>
                 <div className="rightDropdowns">
-                    <label htmlFor="mood"><p>Choose Mood</p></label>
-                    <select id="mood" onChange={this.props.handleChange}>
-                    //checking to see if we have a prop of newMood, if we dont then we want to show this placeholder
-                    <option value="" selected = {this.props.newMood ? false : true } disabled>Select a mood</option>
-                        {this.props.moodArray.map((moodOption) => 
-                        
-                            {
-                            //added selected to option and if it matches the newMood in our props
-                            return <option selected={(this.props.newMood && this.props.newMood) === moodOption ? true : false} value={moodOption}>{moodOption}</option>
-                            }
-                        )}
-                    </select>
-
-                    <label htmlFor="images"><p>Choose Image</p></label>
-                    <select id="images" onChange={this.props.handleChange}>
-                        <option>Default</option>
-                        {/* <option><input type="image" id="images" onChange required value /></option> */}
-                    </select>
-
+                  <label htmlFor="mood">
+                    <p className="form-mood">Choose Mood</p>
+                  </label>
+                  <select className="form-mood-input" id="mood" onChange={this.props.handleChange}>
+                    {/* //checking to see if we have a prop of newMood, if we dont then we want to show this placeholder */}
+                    <option value="" selected={this.props.newMood ? false : true} disabled>
+                      Select a mood
+                    </option>
+                    {this.props.moodArray.map(moodOption => {
+                      //added selected to option and if it matches the newMood in our props
+                    return <option selected={this.props.newMood && (this.props.newMood === moodOption) ? true : false} value={moodOption}>
+                      {moodOption}
+                    </option>;
+                    })}
+                  </select>
                 </div>
+                <label htmlFor="newMood"><p className="form-custom-mood">Add Mood</p></label>
+                <input onChange={this.props.handleChange} className="form-custom-input" type="text" id="newMood" />
+                <button className="form-custom-btn" onClick={this.props.newMoodSubmit} disabled={this.isDisabled()}>
+                  Add
+                </button>
 
-                    <input type="submit" value="Send" />
-            </form>
-            <form>
-                <label htmlFor="newMood">Add New Option</label>
-                <input onChange={this.props.handleChange} type="text" id="newMood"/>
-                <button onClick={this.props.newMoodSubmit}>This be a button</button>
-            </form>
-        </Fragment>
-        );
+                <input className="main-form-btn" type="submit" value="Submit" />
+              </form>
+            </div>
+        </Fragment>;
     }
 }
 

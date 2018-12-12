@@ -1,0 +1,24 @@
+.moods-container {
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.mood-btn-wrap {
+    display: inline-block;
+}
+
+.mood-btn {
+    @include fancyFont(3rem, $accentColorDark);
+    padding: 5px 20px 5px 20px;
+    float: left;
+    position: relative;
+}
+
+.mood-btn:hover::before {
+    content: '-';
+    width: 50px;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    color: $primaryColor;
+}

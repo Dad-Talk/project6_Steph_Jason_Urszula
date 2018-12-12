@@ -1,0 +1,87 @@
+.main-form {
+    position: relative;
+}
+
+.form-container {
+    background: #F2F2F2;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    width: 80%;
+    margin: 0 auto 30px auto;
+}
+
+.form-heading {
+    @include fancyFont(2.5rem, $accentColorDark);
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.form-title,
+.form-description,
+.form-mood,
+.form-custom-mood {
+    @include secondaryFont(2rem, $accentColorDark);
+    padding-bottom: 5px;
+}
+
+.form-title-input,
+.form-description-input,
+.form-mood-input,
+.form-custom-input {
+    border-radius: 5px;
+    border: none;
+    padding: 5px 0;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+.form-custom-input {
+    width: 66%;
+}
+
+.form-custom-btn {
+    @include secondaryFont(1.8rem, $accentColorDark);
+    padding: 1.5px 20px;
+    width: 30%;
+    border: 2px solid $accentColorDark; 
+    margin-left: 4%;
+    border-radius: 5px;
+}
+
+.form-custom-btn:hover {
+    border: 2px solid $accentColorLight;
+    color: $accentColorLight;
+}
+
+.main-form-btn {
+    @include secondaryFont(1.8rem, #fcfcfc);
+    padding: 3px 20px;
+    border: none;
+    background: $accentColorDark;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.main-form-btn:hover {
+    background: $accentColorLight;
+}
+
+
+.toggle-img {
+    float: right;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        max-width: 600px;
+        width: 100%;
+    }
+}
