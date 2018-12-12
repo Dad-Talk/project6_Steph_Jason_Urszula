@@ -8,6 +8,7 @@ import Submission from './Submission';
 import './App.css';
 import logo from "../src/assets/dad-talk-logo.svg";
 import { ifError } from 'assert';
+import SweetAlert from 'sweetalert-react';
 
 //the root of firebase
 const dbRef = firebase.database().ref();
@@ -80,14 +81,14 @@ class App extends Component {
     const newSubmission = {
       title: this.state.title,
       description: this.state.description,
-      mood: this.state.newMood,
+      mood: this.state.newMood || this.state.mood,
       likes: 1,
       userArray: ["test", "test2"]
     }
 
-<<<<<<< HEAD
     if (this.state.newMood === "" && this.state.mood === "") {
-      // alert message 
+      return alert('Please choose a mood before submitting!');
+      
     } else {
 
       // When user submits form, create object that records values of user submission
@@ -113,10 +114,8 @@ class App extends Component {
 
     }
 
-=======
     // Push new object to store to firebase
     posts.push(newSubmission); 
->>>>>>> ffcf933f19f16d8349905aba31f8613901742c4f
 
     // Reset values of state
     this.setState({
@@ -150,9 +149,17 @@ class App extends Component {
     const tempArray = Object.entries(this.state.submitted)
 
     const newState = {};
-    const filteredArray = tempArray.filter((item) => {
-      return item[1].mood === moodButton;
-    }).forEach((match) => {
+    let filteredArray = []
+
+    if (moodButton === "all") {
+      filteredArray = tempArray
+    } else {
+      filteredArray = tempArray.filter((item) => {
+        return item[1].mood === moodButton;
+      })
+    }
+
+    filteredArray.forEach((match) => {
       newState[match[0]] = match[1]
     })
 
@@ -257,7 +264,7 @@ class App extends Component {
           </header>
           <div className="wrapper">
             {/* Submission form will only appear if showForm state is true, and user state is true */}
-            {this.state.showForm && this.state.user && <SubmissionsForm handleChange={this.handleChange // Submission form
+            {this.state.showForm && this.state.user && <SubmissionsForm showForm={this.showFormFunction}handleChange={this.handleChange // Submission form
                 } handleSubmit={this.handleSubmit} title={this.state.title} description={this.state.description} newMoodSubmit={this.newMoodSubmit} moodArray={this.state.moodArray} newMood={this.state.newMood}/>}
             {/* Categories/moods */}
             <div className="moods-container clearfix">

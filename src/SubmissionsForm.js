@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import x from '../src/assets/x.svg';
 
 class SubmissionsForm extends Component {
 
@@ -12,6 +13,9 @@ class SubmissionsForm extends Component {
         return <Fragment>
             <div className="form-container">
               <form onSubmit={this.props.handleSubmit}>
+              <button onClick={this.props.showForm}>
+                  <img src={x} />
+                </button>
                 <h2 className="form-heading">Submit your own conversation starter</h2>
                 <div className="leftInputs clearfix">
                   <label htmlFor="title">
