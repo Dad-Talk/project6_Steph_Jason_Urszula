@@ -1,7 +1,7 @@
 .submission-card {
     width: calc((100% - 60px) / 3);
     height: 330px;
-    margin: 20px 20px;
+    margin: 15px 15px;
     float: left;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;  
@@ -72,7 +72,7 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.submission-card:nth-of-type(3n + 1) {
+.submission-card:nth-child(3n + 1) {
     margin-left: 0;
 }
 
@@ -92,22 +92,36 @@ button, input[type="reset"] {
 	outline: inherit;
 }
 
-// .dont-break-out {
+@media(max-width: 768px) {
+   .submission-card,
+   .submission-card:nth-child(3n + 1),
+   .submission-card:nth-child(3n + 3) {
+        width: calc((100% - 30px) / 2);
+        margin: 15px 15px;
+   } 
 
-//   /* These are technically the same, but use both */
-//   overflow-wrap: break-word;
-//   word-wrap: break-word;
+   .submission-card:nth-child(2n + 1) {
+        margin-left: 0;
+    }
 
-//   -ms-word-break: break-all;
-//   /* This is the dangerous one in WebKit, as it breaks things wherever */
-//   word-break: break-all;
-//   /* Instead use this non-standard one: */
-//   word-break: break-word;
+    .submission-card:nth-child( 2n + 2 ) {
+        margin-right: 0px;
+    }
+}
 
-//   /* Adds a hyphen where the word breaks, if supported (No Blink) */
-//   -ms-hyphens: auto;
-//   -moz-hyphens: auto;
-//   -webkit-hyphens: auto;
-//   hyphens: auto;
+@media(max-width: 540px) {
+    .submission-card,
+    .submission-card:nth-child(3n + 1),
+    .submission-card:nth-child(3n + 3) {
+        width: 100%;
+        margin: 15px 0px;
+   } 
 
-// }
+   .submission-card:nth-child(2n + 1) {
+        margin-left: 0;
+    }
+
+    .submission-card:nth-child( 2n + 2 ) {
+        margin-right: 0px;
+    }
+}

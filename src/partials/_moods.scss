@@ -1,7 +1,15 @@
+.moods-container {
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.mood-btn-wrap {
+    display: inline-block;
+}
 
 .mood-btn {
     @include fancyFont(3rem, $accentColorDark);
-    padding: 20px;
+    padding: 5px 20px 5px 20px;
     float: left;
     position: relative;
 }

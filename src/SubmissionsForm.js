@@ -12,8 +12,8 @@ class SubmissionsForm extends Component {
     render() {
         return <Fragment>
             <div className="form-container">
-              <form onSubmit={this.props.handleSubmit}>
-              <button onClick={this.props.showForm}>
+              <form className="clearfix main-form" onSubmit={this.props.handleSubmit}>
+                <button className="toggle-img" onClick={this.props.showForm}>
                   <img src={x} />
                 </button>
                 <h2 className="form-heading">Submit your own conversation starter</h2>
@@ -48,11 +48,11 @@ class SubmissionsForm extends Component {
                 </div>
                 <label htmlFor="newMood"><p className="form-custom-mood">Add Mood</p></label>
                 <input onChange={this.props.handleChange} className="form-custom-input" type="text" id="newMood" />
-                <button className="form-btn" onClick={this.props.newMoodSubmit} disabled={this.isDisabled()}>
+                <button className="form-custom-btn" onClick={this.props.newMoodSubmit} disabled={this.isDisabled()}>
                   Add
                 </button>
 
-                <input className="form-btn" type="submit" value="Submit" />
+                <input className="main-form-btn" type="submit" value="Submit" />
               </form>
             </div>
         </Fragment>;
