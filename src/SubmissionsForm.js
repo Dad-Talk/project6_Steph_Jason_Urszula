@@ -1,17 +1,21 @@
 import React, { Component, Fragment } from 'react';
+import x from '../src/assets/x.svg';
 
 class SubmissionsForm extends Component {
 
-  isDisabled = () => {
-    if (this.props.newMood === "") {
-      return true;
+    isDisabled = () => {
+        if (this.props.newMood === "") {
+            return true;
+        }
+        return false;
     }
-    return false;
-  }
     render() {
         return <Fragment>
             <div className="form-container">
               <form onSubmit={this.props.handleSubmit}>
+              <button onClick={this.props.showForm}>
+                  <img src={x} />
+                </button>
                 <h2 className="form-heading">Submit your own conversation starter</h2>
                 <div className="leftInputs clearfix">
                   <label htmlFor="title">
@@ -51,7 +55,7 @@ class SubmissionsForm extends Component {
                 <input className="form-btn" type="submit" value="Submit" />
               </form>
             </div>
-          </Fragment>;
+        </Fragment>;
     }
 }
 
