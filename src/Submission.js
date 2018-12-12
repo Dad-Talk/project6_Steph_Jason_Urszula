@@ -1,19 +1,15 @@
 import React from 'react';
 import "./App.css";
 import thumbsUp from '../src/assets/thumbs-up.svg'
-// import Likes from './Likes'
 
 const Submission = props => {
-    // function imageRandom(array) {
-    // return array[Math.floor(Math.random() * (array.length))];
-    // }
     return (
         <div>
             { // Object.entries returns us an array so we can use map
 
                 Object.entries(props.sortSubmitted).map((card) => {
-                    return <div key={card}>
-                        <div className="submission-card">
+                    return(
+                      <div className="submission-card" key={card}>
                           <div key={card[0]}>
                               <img className="submission-card__img" src={card[1].image} alt="picture of        typical dad" />
                               <p className="submission-card__mood">
@@ -41,8 +37,7 @@ const Submission = props => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>;
+                        </div>)
                 })
             }
         </div>

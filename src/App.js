@@ -8,7 +8,6 @@ import Submission from './Submission';
 import './App.css';
 import logo from "../src/assets/dad-talk-logo.svg";
 import { ifError } from 'assert';
-import SweetAlert from 'sweetalert-react';
 
 //the root of firebase
 const dbRef = firebase.database().ref();
@@ -37,22 +36,20 @@ class App extends Component {
       user: null,
       uid: "",
       showForm: false
-
     };
   }
-
 
   componentDidMount() {
     //attach event listener to firebase
     posts.on('value', (snapshot) => {
-      //firebase method, return me an object the represents verything in the database.
+    //firebase method, return me an object the represents verything in the database.
       this.setState({
         submitted: snapshot.val()//firebase method. Firebase is sending us our brand new object
       })
     });
 
     moods.on('value', (snapshot) => {
-      //snapshot from firebase is not diff enough from firebase, so we have to clone the array
+    //snapshot from firebase is not diff enough from firebase, so we have to clone the array
       console.log('This is a snapshot, moods were updated')
       const newState = Array.from(snapshot.val());
       this.setState({
@@ -91,7 +88,7 @@ class App extends Component {
       
     } else {
 
-      // When user submits form, create object that records values of user submission
+    // When user submits form, create object that records values of user submission
       const newSubmission = {
         title: this.state.title,
         description: this.state.description,
@@ -100,7 +97,7 @@ class App extends Component {
         userArray: ["test", "test2"]
       }
 
-      // Push new object to store to firebase
+    // Push new object to store to firebase
       posts.push(newSubmission);
 
       // Reset values of state
@@ -111,7 +108,6 @@ class App extends Component {
         like: 1,
         newMood: ""
       });
-
     }
 
     // Push new object to store to firebase
@@ -126,8 +122,6 @@ class App extends Component {
       newMood: ""
     });
   }
-
-  //ON click of mood button, we need to change mood: newmood
 
   newMoodSubmit = (e) => {
     e.preventDefault();
@@ -170,14 +164,13 @@ class App extends Component {
     })
   }
 
-
-
   updateLikes = event => {
     event.stopPropagation();
 
-    // //1. clone the current state
+    // clone the current state
     const newLikes = Object.assign({}, this.state.submitted);
     const currentPost = newLikes[event.target.value]
+
     // Variable to target current submission in firebase
     const currentPostFirebase = firebase.database().ref(`/Posts/${event.target.value}`)
 
@@ -201,23 +194,15 @@ class App extends Component {
       currentPost.userArray = newUserArray;
     }
 
-    // //2. add one to the likes at [event.target.value]
-
-
-
-
-    //3. Push new inofrmation to firebase
-    currentPostFirebase.set(currentPost);
+    //Push new information to firebase
     // currentPostFirebase.set(currentPost.userArray);
+    currentPostFirebase.set(currentPost); 
   };
-
-
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value //square brackets evaluate the property
     })
-
   }
 
   // Login function - when user logs in, set states to match user information
@@ -275,13 +260,14 @@ class App extends Component {
                     mood: moodSelected[1]
                   });
                   return (
-                    <div>
-                      {/* the parent needs a clearfix but it stops floats from working */}
-                      {moodButtons.map((displayMood) => {
-                        return <button onClick={() => this.reSubmit(displayMood.mood)} className="mood-btn">{displayMood.mood}</button>;
-                        // annonymous function and ".this" were added infront of reSubmit to have the resubmit function wait to fire until it gets the values passed in the parameter ie displayMood.mood
-                      })}
-                    </div>
+                      <div className="mood-btn-wrap">
+                        {/* the parent needs a clearfix but it stops floats from working */}
+                        {moodButtons.map((displayMood) => {
+                          return <button onClick={() => this.reSubmit(displayMood.mood)} className="mood-btn">{displayMood.mood}</button>;
+                          // annonymous function and ".this" were added infront of reSubmit to have the resubmit function wait to fire until it gets the values passed in the parameter ie displayMood.mood
+                        })}
+                      </div>
+                    
                   );
                 }
               )}
